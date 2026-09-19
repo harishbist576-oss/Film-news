@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Mero Jindagi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Mukta', Arial, sans-serif;
+        }
+        body {
+            background-color: #f4f6f9;
+            color: #333;
+        }
+        header {
+            background-color: #003366;
+            padding: 15px 20px;
+            color: white;
+            text-align: center;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+        .container {
+            width: 100%;
+            max-width: 900px;
+            padding: 10px;
+            margin: 20px auto;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        h2 {
+            color: #003366;
+            margin-bottom: 12px;
+            font-size: 20px;
+            font-weight: 800;
+            border-left: 4px solid #003366;
+            padding-left: 8px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 4px;
+            color: #444;
+            font-size: 14px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 15px;
+            font-family: inherit;
+        }
+        
+        .upload-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .upload-row input[type="file"] {
+            flex: 1;
+            padding: 6px;
+            background: #fafafa;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .preview-img {
+            width: 80px;
+            height: 55px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 2px solid #003366;
+            display: none;
+        }
+
+        .editor-container {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #fff;
+            width: 100%;
+        }
+        .editor-toolbar {
+            background: #eef2f7;
+            padding: 8px 10px;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        #newsContentBox {
+            width: 100%;
+            min-height: 280px;
+            max-height: 600px;
+            overflow-y: auto;
+            padding: 12px;
+            font-size: 16px;
+            font-family: inherit;
+            outline: none;
+            word-break: break-word;
+        }
+        #newsContentBox img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin: 10px 0;
+            display: block;
+        }
+
+        .small-btn {
+            background-color: #27ae60;
+            color: white;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .small-btn:hover {
+            background-color: #219653;
+        }
+
+        .btn {
+            background-color: #003366;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background-color: #002244;
+        }
+        .btn:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+        .cancel-btn {
+            background-color: #7f8c8d;
+            margin-top: 5px;
+            display: none;
+        }
+        .cancel-btn:hover {
+            background-color: #616a6b;
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+        .news-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 5px;
+            white-space: nowrap;
+        }
+        .news-table th, .news-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            font-size: 13px;
+            vertical-align: middle;
+        }
+        .news-table th {
+            background-color: #003366;
+            color: white;
+        }
+        .table-thumb {
+            width: 55px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 3px;
+            display: block;
+        }
+        .action-btns {
+            display: flex;
+            gap: 4px;
+        }
+        .edit-btn {
+            background-color: #f39c12;
+            color: white;
+            padding: 5px 8px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .edit-btn:hover {
+            background-color: #d68910;
+        }
+        .delete-btn {
+            background-color: #e74c3c;
+            color: white;
+            padding: 5px 8px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+        .nav-links {
+            margin-bottom: 12px;
+        }
+        .back-link {
+            text-decoration: none;
+            color: #003366;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .uploading-text {
+            font-size: 12px;
+            color: #e67e22;
+            font-weight: bold;
+            margin-top: 4px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>⚙️ Admin Control Panel</h1>
+        </div>
+        <button id="logoutBtn" class="delete-btn" style="display:none; padding: 6px 12px; font-size: 13px;">Logout</button>
+    </header>
+
+    <div class="container">
+        <div class="nav-links">
+            <a href="index.html" class="back-link">← मुख्य वेबसाइटमा जानुहोस्</a>
+        </div>
+
+        <!-- 🔐 LOGIN SECTION -->
+        <div id="loginSection" class="card" style="max-width: 400px; margin: 40px auto;">
+            <h2>Admin Login</h2>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="loginEmail" placeholder="admin@gmail.com">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="loginPassword" placeholder="********">
+            </div>
+            <button id="loginBtn" class="btn">Login</button>
+            <p id="loginError" style="color:red; font-size:13px; margin-top:10px; text-align:center;"></p>
+        </div>
+
+        <!-- 📊 ADMIN DASHBOARD -->
+        <div id="adminDashboard" style="display:none;">
+            <!-- नयाँ समाचार थप्ने वा एडिट गर्ने फर्म -->
+            <div class="card">
+                <h2 id="formHeading">➕ नयाँ समाचार थप्नुहोस्</h2>
+                <form id="addNewsForm">
+                    <input type="hidden" id="editNewsId" value="">
+                    
+                    <div class="form-group">
+                        <label for="newsCategory">श्रेणी (Category) छान्नुहोस्:</label>
+                        <select id="newsCategory" required>
+                            <option value="Nepali Movie">Nepali Movie</option>
+                            <option value="Bollywood Movie">Bollywood Movie</option>
+                            <option value="Hollywood Movie">Hollywood Movie</option>
+                            <option value="Celebrity Lifestyle">Celebrity Lifestyle</option>
+                            <option value="Political News">Political News</option>
+                            <option value="History">History</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newsTitle">समाचारको शिर्षक (Title):</label>
+                        <input type="text" id="newsTitle" required placeholder="यहाँ शीर्षक लेख्नुहोस्...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newsAuthor">लेखकको नाम (Author):</label>
+                        <input type="text" id="newsAuthor" value="Film Desk" required placeholder="लेखकको नाम...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newsImageFile">मुख्य थम्बनेल तस्बिर (Main Thumbnail):</label>
+                        <div class="upload-row">
+                            <input type="file" id="newsImageFile" accept="image/*">
+                            <img id="imagePreview" class="preview-img" alt="Preview">
+                        </div>
+                        <span id="mainUploadStatus" class="uploading-text" style="display:none;">फोटो अपलोड हुँदैछ...</span>
+                        <small style="color:#666;">(नयाँ फोटो नछान्दा पुरानै फोटो कायम रहनेछ)</small>
+                    </div>
+
+                    <!-- 📝 टेक्स्ट र फोटो सँगै देखिने फुल स्क्रिन एडिटर बक्स -->
+                    <div class="form-group">
+                        <label>समाचारको पूर्ण विवरण (Content Box):</label>
+                        
+                        <div class="editor-container">
+                            <div class="editor-toolbar">
+                                <input type="file" id="inlineImageFile" accept="image/*" style="flex:1; padding:4px; font-size:13px; background:white;">
+                                <button type="button" class="small-btn" id="insertImgBtn">➕ फोटो घुसाउनुहोस्</button>
+                            </div>
+                            <div id="newsContentBox" contenteditable="true"></div>
+                        </div>
+                        <span id="contentUploadStatus" class="uploading-text" style="display:none;">कन्टेन्ट फोटो अपलोड हुँदैछ...</span>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="btn">समाचार सेभ (Save) गर्नुहोस्</button>
+                    <button type="button" id="cancelBtn" class="btn cancel-btn">सच्याउनुहोस् (Cancel Edit)</button>
+                </form>
+            </div>
+
+            <!-- हाल भएका समाचारहरूको सूची -->
+            <div class="card">
+                <h2>📋 सबै समाचारहरूको सूची (Manage News & Views)</h2>
+                <div class="table-responsive">
+                    <table class="news-table">
+                        <thead>
+                            <tr>
+                                <th>तस्बिर</th>
+                                <th>शीर्षक र लेखक</th>
+                                <th>श्रेणी</th>
+                                <th>Views</th>
+                                <th>नियन्त्रण</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminNewsList">
+                            <tr><td colspan="5" style="text-align:center; color:#666;">समाचारहरू लोड हुँदैछ...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase & ImgBB API Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs, getDoc, updateDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyDLn2oGT-rIZjcvKxbcCedfPBalpIDsaJw",
+          authDomain: "filmynews-3ba45.firebaseapp.com",
+          projectId: "filmynews-3ba45",
+          storageBucket: "filmynews-3ba45.firebasestorage.app",
+          messagingSenderId: "902647197974",
+          appId: "1:902647197974:web:3eec0940b8ec56bf22e037"
+        };
+
+        const IMGBB_API_KEY = "5a325197e3abb916160e59cb78bd0818";
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const loginSection = document.getElementById('loginSection');
+        const adminDashboard = document.getElementById('adminDashboard');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const loginBtn = document.getElementById('loginBtn');
+        const loginError = document.getElementById('loginError');
+
+        let mainImageUrl = "";
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                loginSection.style.display = 'none';
+                adminDashboard.style.display = 'block';
+                logoutBtn.style.display = 'block';
+                fetchAdminNews();
+            } else {
+                loginSection.style.display = 'block';
+                adminDashboard.style.display = 'none';
+                logoutBtn.style.display = 'none';
+            }
+        });
+
+        loginBtn.addEventListener('click', async () => {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            loginError.textContent = "";
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+            } catch (error) {
+                loginError.textContent = "लगइन असफल भयो! इमेल वा पासवर्ड मिलेन।";
+            }
+        });
+
+        logoutBtn.addEventListener('click', async () => {
+            await signOut(auth);
+        });
+
+        // ImgBB Upload Function
+        async function uploadToImgBB(file) {
+            const formData = new FormData();
+            formData.append("image", file);
+
+            const response = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
+                method: "POST",
+                body: formData
+            });
+            const data = await response.json();
+            if (data.success) {
+                return data.data.url;
+            } else {
+                throw new Error("ImgBB upload failed");
+            }
+        }
+
+        // Main Image Handler
+        const newsImageFile = document.getElementById('newsImageFile');
+        const imagePreview = document.getElementById('imagePreview');
+        const mainUploadStatus = document.getElementById('mainUploadStatus');
+        const submitBtn = document.getElementById('submitBtn');
+
+        newsImageFile.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                mainUploadStatus.style.display = 'block';
+                mainUploadStatus.style.color = '#e67e22';
+                mainUploadStatus.textContent = "मुख्य फोटो अपलोड हुँदैछ...";
+                submitBtn.disabled = true;
+
+                try {
+                    mainImageUrl = await uploadToImgBB(file);
+                    imagePreview.src = mainImageUrl;
+                    imagePreview.style.display = 'block';
+                    mainUploadStatus.style.color = '#27ae60';
+                    mainUploadStatus.textContent = "फोटो सफलतापूर्वक अपलोड भयो!";
+                } catch (err) {
+                    mainUploadStatus.style.color = '#e74c3c';
+                    mainUploadStatus.textContent = "फोटो अपलोड असफल भयो।";
+                    newsImageFile.value = "";
+                } finally {
+                    submitBtn.disabled = false;
+                }
+            }
+        });
+
+        // Content Inline Image Handler
+        const insertImgBtn = document.getElementById('insertImgBtn');
+        const inlineImageFile = document.getElementById('inlineImageFile');
+        const contentUploadStatus = document.getElementById('contentUploadStatus');
+        const newsContentBox = document.getElementById('newsContentBox');
+
+        insertImgBtn.addEventListener('click', async () => {
+            const file = inlineImageFile.files[0];
+            if (!file) {
+                alert('कृपया पहिले फोटो छान्नुहोस्!');
+                return;
+            }
+
+            contentUploadStatus.style.display = 'block';
+            contentUploadStatus.style.color = '#e67e22';
+            contentUploadStatus.textContent = "कन्टेन्ट फोटो अपलोड हुँदैछ...";
+            submitBtn.disabled = true;
+
+            try {
+                const inlineImgUrl = await uploadToImgBB(file);
+                newsContentBox.focus();
+
+                const imgTag = `<img src="${inlineImgUrl}" alt="News Image">`;
+                const selection = window.getSelection();
+                if (selection.rangeCount > 0) {
+                    const range = selection.getRangeAt(0);
+                    range.deleteContents();
+                    const div = document.createElement('div');
+                    div.innerHTML = imgTag;
+                    range.insertNode(div.firstChild);
+                } else {
+                    newsContentBox.innerHTML += imgTag;
+                }
+
+                contentUploadStatus.style.color = '#27ae60';
+                contentUploadStatus.textContent = "कन्टेन्ट फोटो जोडियो!";
+                inlineImageFile.value = "";
+            } catch (err) {
+                contentUploadStatus.style.color = '#e74c3c';
+                contentUploadStatus.textContent = "कन्टेन्ट फोटो अपलोड असफल भयो।";
+            } finally {
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Add or Update Form Submit Handler
+        const addNewsForm = document.getElementById('addNewsForm');
+        addNewsForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const editId = document.getElementById('editNewsId').value;
+            const category = document.getElementById('newsCategory').value;
+            const title = document.getElementById('newsTitle').value;
+            const author = document.getElementById('newsAuthor').value;
+            const content = newsContentBox.innerHTML;
+
+            if (content.trim() === "" || content === "<br>") {
+                alert('कृपया समाचारको विवरण लेख्नुहोस्!');
+                return;
+            }
+
+            if (!editId && !mainImageUrl) {
+                alert('कृपया मुख्य तस्बिर छान्नुहोस्!');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = editId ? "अपडेट हुँदैछ..." : "सेभ हुँदैछ...";
+
+            try {
+                if (editId) {
+                    const updateData = { title, category, author, content };
+                    if (mainImageUrl) {
+                        updateData.image = mainImageUrl;
+                    }
+                    await updateDoc(doc(db, "news", editId), updateData);
+                    alert('समाचार सफलतापूर्वक अपडेट (Edit) भयो!');
+                } else {
+                    await addDoc(collection(db, "news"), {
+                        title,
+                        category,
+                        author,
+                        image: mainImageUrl,
+                        content,
+                        views: 0,
+                        createdAt: new Date()
+                    });
+                    alert('सफलतापूर्वक नयाँ समाचार थपियो!');
+                }
+
+                resetForm();
+                fetchAdminNews();
+            } catch (error) {
+                console.error("Error saving news:", error);
+                alert('सेभ गर्न सकिएन।');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = "समाचार सेभ (Save) गर्नुहोस्";
+            }
+        });
+
+        async function fetchAdminNews() {
+            const adminNewsList = document.getElementById('adminNewsList');
+            adminNewsList.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#666;">समाचारहरू लोड हुँदैछ...</td></tr>';
+
+            try {
+                const querySnapshot = await getDocs(collection(db, "news"));
+                adminNewsList.innerHTML = '';
+
+                if (querySnapshot.empty) {
+                    adminNewsList.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#666;">कुनै पनि समाचार भेटिएन।</td></tr>';
+                    return;
+                }
+
+                querySnapshot.forEach((documentSnap) => {
+                    const news = documentSnap.data();
+                    const newsId = documentSnap.id;
+                    const views = news.views || 0;
+                    const shortTitle = news.title.length > 30 ? news.title.substring(0, 30) + '...' : news.title;
+
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td><img src="${news.image || 'https://picsum.photos/800/400'}" class="table-thumb" alt="Thumb"></td>
+                        <td><b>${shortTitle}</b><br><small style="color:#666;">लेखक: ${news.author || 'Film Desk'}</small></td>
+                        <td>${news.category}</td>
+                        <td>👁️ <b>${views}</b></td>
+                        <td>
+                            <div class="action-btns">
+                                <button class="edit-btn" onclick="window.editNews('${newsId}')">Edit</button>
+                                <button class="delete-btn" onclick="window.deleteNews('${newsId}')">Delete</button>
+                            </div>
+                        </td>
+                    `;
+                    adminNewsList.appendChild(tr);
+                });
+            } catch (error) {
+                console.error("Error fetching news:", error);
+            }
+        }
+
+        window.editNews = async function(id) {
+            try {
+                const docRef = doc(db, "news", id);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    const news = docSnap.data();
+                    document.getElementById('editNewsId').value = id;
+                    document.getElementById('newsCategory').value = news.category || "Nepali Movie";
+                    document.getElementById('newsTitle').value = news.title || "";
+                    document.getElementById('newsAuthor').value = news.author || "Film Desk";
+                    newsContentBox.innerHTML = news.content || "";
+
+                    if (news.image) {
+                        imagePreview.src = news.image;
+                        imagePreview.style.display = 'block';
+                    }
+
+                    document.getElementById('formHeading').innerText = "✏️ समाचार सच्याउनुहोस् (Edit News)";
+                    submitBtn.innerText = "अपडेट (Update) गर्नुहोस्";
+                    document.getElementById('cancelBtn').style.display = "block";
+
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            } catch (error) {
+                alert("एटा लोड गर्न असफल भयो।");
+            }
+        }
+
+        document.getElementById('cancelBtn').addEventListener('click', resetForm);
+
+        function resetForm() {
+            addNewsForm.reset();
+            newsContentBox.innerHTML = "";
+            document.getElementById('editNewsId').value = "";
+            imagePreview.style.display = 'none';
+            mainUploadStatus.style.display = 'none';
+            contentUploadStatus.style.display = 'none';
+            document.getElementById('formHeading').innerText = "➕ नयाँ समाचार थप्नुहोस्";
+            submitBtn.innerText = "समाचार सेभ (Save) गर्नुहोस्";
+            document.getElementById('cancelBtn').style.display = "none";
+            mainImageUrl = "";
+        }
+
+        window.deleteNews = async function(id) {
+            if (confirm('के तपाईं यो समाचार हटाउन चाहनुहुन्छ?')) {
+                try {
+                    await deleteDoc(doc(db, "news", id));
+                    alert("समाचार सफलतापूर्वक हटाइयो!");
+                    fetchAdminNews();
+                } catch (error) {
+                    alert("डिलिट गर्न असफल भयो।");
+                }
+            }
+        }
+    </script>
+</body>
+</html>

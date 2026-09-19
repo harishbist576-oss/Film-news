@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Dynamic Open Graph Meta Tags (शेयर गर्दा थम्बनेल र शीर्षक देखाउनको लागि) -->
+    <meta property="og:title" id="metaTitle" content="Mero Jindagi News">
+    <meta property="og:description" id="metaDesc" content="Mero Jindagi - तपाईंको भरपर्दो समाचार पोर्टल">
+    <meta property="og:image" id="metaImage" content="https://picsum.photos/800/400">
+    <meta property="og:url" id="metaUrl" content="">
+
+    <title id="pageTitle">समाचार विवरण - Mero Jindagi</title>
+    
+    <!-- Mukta फन्ट लोड गरिएको छ -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Mukta', Arial, sans-serif; }
+        
+        body { background-color: #0d1117; color: #f0f6fc; display: flex; flex-direction: column; min-height: 100vh; }
+        
+        header { background-color: #161b22; padding: 18px 30px; display: flex; justify-content: center; align-items: center; border-bottom: 4px solid #f39c12; width: 100%; }
+        .header-category-only { font-size: 24px; font-weight: 800; color: #ffffff; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .container { 
+            width: 100%; 
+            max-width: 850px; 
+            margin: 20px auto; 
+            padding: 0 8px; 
+            flex: 1;
+        }
+
+        .back-btn { 
+            background-color: #161b22; 
+            color: white; 
+            padding: 9px 18px; 
+            border-radius: 6px; 
+            border: 1px solid #30363d; 
+            cursor: pointer; 
+            font-weight: 800; 
+            margin-bottom: 20px; 
+            display: inline-block; 
+            text-decoration: none; 
+            font-size: 15px;
+        }
+        .back-btn:hover { background-color: #f39c12; border-color: #f39c12; }
+
+        .detail-title { 
+            font-size: 30px; 
+            color: #ffffff; 
+            margin-bottom: 15px; 
+            line-height: 1.4; 
+            font-weight: 800;
+            width: 100%;
+        }
+
+        .detail-meta-box { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid #30363d; 
+            border-top: 2px solid #30363d;
+            padding: 12px 0; 
+            margin-bottom: 25px; 
+            font-size: 15px; 
+            color: #8b949e; 
+            font-weight: 800;
+        }
+
+        .detail-img { 
+            width: 100%; 
+            max-height: 480px; 
+            object-fit: cover; 
+            border-radius: 10px; 
+            margin-bottom: 25px; 
+            border: 1px solid #30363d;
+        }
+
+        /* सेतो ब्याकग्राउन्ड कार्ड कन्टेन्ट */
+        .content-card {
+            background-color: #ffffff;
+            border: 1px solid #d0d7de;
+            border-radius: 12px;
+            padding: 24px 20px;
+            margin-bottom: 20px;
+            font-size: 22px;
+            color: #24292f;
+            line-height: 1.9;
+            font-weight: 700;
+            width: 100%;
+            text-align: justify;
+            word-break: normal;
+            overflow-wrap: break-word;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .content-card p {
+            margin-bottom: 18px;
+            width: 100%;
+        }
+        .content-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* प्रत्येक ५० शब्द पछि आउने स्वचालित ब्यानर विज्ञापन बक्स */
+        .ad-box {
+            border: 2px dashed #484f58;
+            background-color: #161b22;
+            text-align: center;
+            padding: 20px;
+            color: #8b949e;
+            font-size: 16px;
+            font-weight: 800;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        /* 🌟 Realtime Share Section */
+        .share-container-box {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin: 25px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .share-counter-area {
+            display: flex;
+            flex-direction: column;
+            color: #ffffff;
+        }
+
+        .share-count-number {
+            font-size: 28px;
+            font-weight: 800;
+            color: #f39c12;
+            line-height: 1;
+        }
+
+        .share-count-text {
+            font-size: 14px;
+            font-weight: 800;
+            color: #8b949e;
+            text-transform: uppercase;
+        }
+
+        .share-buttons-grid {
+            display: flex;
+            gap: 4px;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .s-btn {
+            width: 52px;
+            height: 48px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .s-btn:hover { opacity: 0.85; }
+
+        .sb-fb { background-color: #3b5998; }
+        .sb-x { background-color: #000000; border-left: 1px solid #333; border-right: 1px solid #333; }
+        .sb-msg { background-color: #0084ff; }
+        .sb-wa { background-color: #25d366; }
+        .sb-more { background-color: #88cc44; }
+
+        /* All News List Section (सबै समाचारहरूको थम्बनेलसहितको सूची) */
+        .related-section {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 3px solid #30363d;
+        }
+        .related-heading {
+            font-size: 22px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 18px;
+            border-left: 5px solid #f39c12;
+            padding-left: 10px;
+        }
+        .related-card {
+            display: flex;
+            gap: 15px;
+            background: #161b22;
+            padding: 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid #30363d;
+            margin-bottom: 12px;
+            align-items: center;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        .related-card:hover {
+            border-color: #f39c12;
+            transform: translateX(3px);
+        }
+        .related-thumb {
+            width: 120px;
+            height: 85px;
+            object-fit: cover;
+            border-radius: 6px;
+            flex-shrink: 0;
+            border: 1px solid #30363d;
+        }
+        .related-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .related-cat {
+            font-size: 12px;
+            color: #f39c12;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .related-title {
+            font-size: 17px;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.4;
+        }
+
+        /* Custom Popup */
+        .custom-popup-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.75); display: flex; justify-content: center; align-items: center;
+            z-index: 9999; opacity: 0; visibility: hidden; transition: 0.3s;
+        }
+        .custom-popup-overlay.active { opacity: 1; visibility: visible; }
+        .custom-popup-box {
+            background: #161b22; padding: 25px; border-radius: 12px; text-align: center; max-width: 320px; width: 90%;
+            border-top: 4px solid #f39c12; color: #fff; border: 1px solid #30363d;
+        }
+        .custom-popup-btn {
+            background-color: #f39c12; color: white; border: none; padding: 9px 22px; font-weight: 800; border-radius: 6px; cursor: pointer; margin-top: 15px;
+        }
+
+        footer { background-color: #161b22; color: #8b949e; text-align: center; padding: 25px; margin-top: 40px; font-size: 14px; border-top: 1px solid #30363d; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" id="headerCategoryOnly" class="header-category-only">MERO JINDAGI</a>
+    </header>
+
+    <div class="container">
+        <a href="index.html" class="back-btn">← मुख्य पृष्ठमा फर्कनुहोस्</a>
+        
+        <div id="newsDetailContainer">
+            <p style="text-align:center; color:#8b949e; font-size: 18px; padding: 40px; font-weight: 800;">समाचार लोड हुँदैछ...</p>
+        </div>
+    </div>
+
+    <div id="customPopup" class="custom-popup-overlay">
+        <div class="custom-popup-box">
+            <div style="font-size: 18px; font-weight: 800; margin-bottom: 10px;">लिंक सफलतापूर्वक कपी भयो!</div>
+            <button class="custom-popup-btn" onclick="closeCustomPopup()">ठीक छ</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Mero Jindagi. All rights reserved.</p>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, doc, getDoc, updateDoc, increment, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyDLn2oGT-rIZjcvKxbcCedfPBalpIDsaJw",
+          authDomain: "filmynews-3ba45.firebaseapp.com",
+          projectId: "filmynews-3ba45",
+          storageBucket: "filmynews-3ba45.firebasestorage.app",
+          messagingSenderId: "902647197974",
+          appId: "1:902647197974:web:3eec0940b8ec56bf22e037"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let currentNewsId = null;
+
+        // शेयर काउन्ट रियलटाइम बढाउने फंक्सन
+        window.handleShare = async function(platform) {
+            if (!currentNewsId) return;
+
+            try {
+                const docRef = doc(db, "news", currentNewsId);
+                await updateDoc(docRef, {
+                    shareCount: increment(1)
+                });
+
+                const countElem = document.getElementById('shareCountNum');
+                if(countElem) {
+                    let currentCount = parseInt(countElem.textContent) || 0;
+                    countElem.textContent = currentCount + 1;
+                }
+            } catch (error) {
+                console.error("Error updating share count:", error);
+            }
+
+            const pageUrl = encodeURIComponent(window.location.href);
+            const shareText = encodeURIComponent(window.document.title);
+
+            if (platform === 'fb') {
+                window.open(`https://facebook.com/sharer/sharer.php?u=${pageUrl}`, '_blank');
+            } else if (platform === 'x') {
+                window.open(`https://twitter.com/intent/tweet?url=${pageUrl}&text=${shareText}`, '_blank');
+            } else if (platform === 'msg') {
+                window.open(`https://facebook.com/dialog/send?link=${pageUrl}&app_id=291494419107518&redirect_uri=${pageUrl}`, '_blank');
+            } else if (platform === 'wa') {
+                window.open(`https://api.whatsapp.com/send?text=${shareText}%20-%20${pageUrl}`, '_blank');
+            } else if (platform === 'more') {
+                document.getElementById('customPopup').classList.add('active');
+                navigator.clipboard.writeText(window.location.href);
+            }
+        }
+
+        window.closeCustomPopup = function() {
+            document.getElementById('customPopup').classList.remove('active');
+        }
+
+        // हरेक ५०-५० शब्दमा टुक्राउने र बीचमा विज्ञापन राख्ने फंक्सन
+        function generateContentWithAds(text, wordLimit = 50) {
+            const words = text.split(/\s+/);
+            if (words.length <= wordLimit) {
+                return `<div class="content-card"><p>${text}</p></div>`;
+            }
+
+            let htmlOutput = '';
+            for (let i = 0; i < words.length; i += wordLimit) {
+                let chunk = words.slice(i, i + wordLimit).join(' ');
+                htmlOutput += `
+                    <div class="content-card">
+                        <p>${chunk}</p>
+                    </div>
+                `;
+                
+                if (i + wordLimit < words.length) {
+                    htmlOutput += `
+                        <div class="ad-box">
+                        </div>
+                    `;
+                }
+            }
+            return htmlOutput;
+        }
+
+        async function loadNewsDetail() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const newsId = urlParams.get('id');
+            currentNewsId = newsId;
+            const container = document.getElementById('newsDetailContainer');
+            const headerCategoryOnly = document.getElementById('headerCategoryOnly');
+
+            if (!newsId) {
+                headerCategoryOnly.textContent = "MERO JINDAGI";
+                container.innerHTML = `<h2 style="color:#ff7b72; text-align:center; font-weight:900;">समाचार फेला परेन!</h2>`;
+                return;
+            }
+
+            try {
+                const docRef = doc(db, "news", newsId);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const selectedNews = docSnap.data();
+                    headerCategoryOnly.textContent = selectedNews.category || "MERO JINDAGI";
+
+                    // Social Share का लागि Meta Tags अपडेट गर्ने
+                    document.getElementById('pageTitle').textContent = selectedNews.title + " - Mero Jindagi";
+                    document.getElementById('metaTitle').setAttribute('content', selectedNews.title);
+                    document.getElementById('metaDesc').setAttribute('content', selectedNews.content ? selectedNews.content.substring(0, 100) + '...' : '');
+                    document.getElementById('metaImage').setAttribute('content', selectedNews.image || 'https://picsum.photos/800/400');
+                    document.getElementById('metaUrl').setAttribute('content', window.location.href);
+
+                    const totalShares = selectedNews.shareCount || 0;
+
+                    // 🌟 Firebase बाट सबै समाचारहरू (All News) तानेर तल सूची बनाउने
+                    const querySnapshot = await getDocs(collection(db, "news"));
+                    let allNewsHtml = `
+                        <div class="related-section">
+                            <h3 class="related-heading">थप अन्य समाचारहरू</h3>
+                    `;
+                    
+                    querySnapshot.forEach((d) => {
+                        // हाल पढेको समाचार बाहेक अरू सबै समाचारहरू देखाउने (यदि हालको मात्रै पनि देखाउने भए यो कन्डिसन हटाउन सकिन्छ)
+                        const data = d.data();
+                        allNewsHtml += `
+                            <a href="read.html?id=${d.id}" class="related-card">
+                                <img src="${data.image || 'https://picsum.photos/800/400'}" class="related-thumb" alt="Thumbnail">
+                                <div class="related-info">
+                                    <span class="related-cat">${data.category || 'News'}</span>
+                                    <h4 class="related-title">${data.title}</h4>
+                                </div>
+                            </a>
+                        `;
+                    });
+                    allNewsHtml += `</div>`;
+
+                    let contentText = selectedNews.content || '';
+                    let formattedContent = generateContentWithAds(contentText, 50);
+
+                    container.innerHTML = `
+                        <h1 class="detail-title">${selectedNews.title}</h1>
+                        
+                        <div class="detail-meta-box">
+                            <span>लेखक: ${selectedNews.author || 'Admin'}</span>
+                            <span>Category: ${selectedNews.category || 'General'}</span>
+                        </div>
+
+                        <img src="${selectedNews.image || 'https://picsum.photos/800/400'}" class="detail-img" alt="News Image">
+
+                        <!-- ५०-५० शब्दको अन्तरालमा कार्ड र स्वचालित विज्ञापनहरू -->
+                        ${formattedContent}
+
+                        <!-- Realtime Share Bar -->
+                        <div class="share-container-box">
+                            <div class="share-counter-area">
+                                <span class="share-count-number" id="shareCountNum">${totalShares}</span>
+                                <span class="share-count-text">Shares</span>
+                            </div>
+                            <div class="share-buttons-grid">
+                                <button onclick="handleShare('fb')" class="s-btn sb-fb" title="Facebook">f</button>
+                                <button onclick="handleShare('x')" class="s-btn sb-x" title="X (Twitter)">𝕏</button>
+                                <button onclick="handleShare('msg')" class="s-btn sb-msg" title="Messenger">💬</button>
+                                <button onclick="handleShare('wa')" class="s-btn sb-wa" title="WhatsApp">📞</button>
+                                <button onclick="handleShare('more')" class="s-btn sb-more" title="Copy Link / More">🔗</button>
+                            </div>
+                        </div>
+
+                        <!-- 🌟 सबै समाचारहरूको थम्बनेलसहितको सूची -->
+                        ${allNewsHtml}
+                    `;
+                } else {
+                    headerCategoryOnly.textContent = "MERO JINDAGI";
+                    container.innerHTML = `<h2 style="color:#ff7b72; text-align:center; font-weight:900;">समाचार फेला परेन!</h2>`;
+                }
+            } catch (error) {
+                console.error("Error loading news detail:", error);
+                container.innerHTML = `<h2 style="color:#ff7b72; text-align:center; font-weight:900;">त्रुटि (Error)</h2>`;
+            }
+        }
+
+        loadNewsDetail();
+    </script>
+</body>
+</html>

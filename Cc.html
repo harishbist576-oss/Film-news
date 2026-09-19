@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Film News - Policy & Settings</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        body {
+            background-color: #f4f6f9;
+            color: #333;
+        }
+        /* Top Header & Logo */
+        header {
+            background-color: #001f3f;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid #f39c12;
+            flex-wrap: wrap;
+        }
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+        }
+        .logo-main {
+            font-size: 26px;
+            font-weight: 900;
+            color: #ffffff;
+            text-decoration: none;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+        .logo-sub {
+            font-size: 13px;
+            font-weight: bold;
+            color: #f39c12;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .nav-btn {
+            background-color: #f39c12;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+        }
+        .nav-btn:hover {
+            background-color: #d68910;
+        }
+
+        /* Policy Navigation Menu */
+        nav {
+            background-color: #002b5c;
+            display: flex;
+            overflow-x: auto;
+            padding: 0 10px;
+            white-space: nowrap;
+        }
+        nav a {
+            color: white;
+            padding: 12px 18px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        nav a:hover, nav a.active {
+            background-color: #f39c12;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        /* Page Sections */
+        .page-section {
+            display: none;
+        }
+        .page-section.active-page {
+            display: block;
+        }
+
+        /* Static Cards for Policies */
+        .content-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .content-card h2 {
+            color: #001f3f;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        .content-card h1 {
+            color: #001f3f;
+            font-size: 24px;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #f39c12;
+            padding-bottom: 8px;
+        }
+        .content-card p, .content-card li {
+            margin-bottom: 12px;
+            font-size: 15px;
+            color: #444;
+            line-height: 1.6;
+        }
+        .content-card ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        .contact-box {
+            background: #eef2f7;
+            padding: 15px;
+            border-left: 4px solid #001f3f;
+            border-radius: 4px;
+            margin-top: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #001f3f;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+        footer a {
+            color: #f39c12;
+            text-decoration: none;
+            margin: 0 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 🔝 Header & Logo -->
+    <header>
+        <div class="logo-container">
+            <a onclick="window.location.href='index.html'" class="logo-main">Film News</a>
+            <span class="logo-sub">🎬 Settings & Policies</span>
+        </div>
+        <div>
+            <button class="nav-btn" onclick="window.location.href='index.html'">🏠 Home</button>
+        </div>
+    </header>
+
+    <!-- 📂 Policy Navigation Menu (AdSense Rules Button Tabs) -->
+    <nav id="policyNav">
+        <a class="active" onclick="showSection('privacy', this)">🔒 Privacy Policy</a>
+        <a onclick="showSection('terms', this)">📜 Terms & Conditions</a>
+        <a onclick="showSection('about', this)">ℹ️ About Us</a>
+        <a onclick="showSection('contact', this)">📞 Contact Us</a>
+    </nav>
+
+    <div class="container">
+
+        <!-- 🔒 PRIVACY POLICY (Google AdSense Compliant) -->
+        <div id="privacy" class="page-section active-page">
+            <div class="content-card">
+                <h1>Privacy Policy for Film News</h1>
+                <p>At <b>Film News</b>, accessible from our website, the privacy of our visitors is of extreme importance to us. This Privacy Policy document outlines the types of personal information is received and collected by Film News and how it is used.</p>
+
+                <h2>1. Information We Collect</h2>
+                <p>When you visit our website, we may collect standard information such as your internet protocol (IP) address, browser type, Internet Service Provider (ISP), date/time stamp, and referring/exit pages.</p>
+
+                <h2>2. Google AdSense & DART Cookies</h2>
+                <p>Google, as a third-party vendor, uses cookies to serve ads on Film News.</p>
+                <ul>
+                    <li>Google's use of DART cookies enables it to serve ads to our site's visitors based upon their visit to Film News and other sites on the Internet.</li>
+                    <li>Users may opt out of the use of the DART cookie by visiting the Google ad and content network privacy policy at the following URL: <a href="https://policies.google.com/technologies/ads" target="_blank">https://policies.google.com/technologies/ads</a></li>
+                </ul>
+
+                <h2>3. Third-Party Advertising Policies</h2>
+                <p>You may consult this listing to find the Privacy Policy for each of the advertising partners of Film News. Third-party ad servers or ad networks use technologies like cookies, JavaScript, or Web Beacons that are used in their respective advertisements and links that appear on Film News.</p>
+
+                <h2>4. Consent</h2>
+                <p>By using our website, you hereby consent to our Privacy Policy and agree to its terms.</p>
+            </div>
+        </div>
+
+        <!-- 📜 TERMS & CONDITIONS -->
+        <div id="terms" class="page-section">
+            <div class="content-card">
+                <h1>Terms and Conditions / Disclaimer</h1>
+                <h2>1. Acceptance of Terms</h2>
+                <p>By accessing and using Film News, you accept and agree to be bound by the terms and provision of this agreement.</p>
+
+                <h2>2. Intellectual Property Rights</h2>
+                <p>Other than the content you own, under these Terms, Film News and/or its licensors own all the intellectual property rights and materials contained in this website.</p>
+
+                <h2>3. Restrictions</h2>
+                <p>You are specifically restricted from all of the following:</p>
+                <ul>
+                    <li>publishing any website material in any other media without prior permission;</li>
+                    <li>selling, sublicensing and/or otherwise commercializing any website material;</li>
+                    <li>using this website in any way that is or may be damaging to this website.</li>
+                </ul>
+
+                <h2>4. Content Liability</h2>
+                <p>We shall not be hold responsible for any content that appears on your Website. You agree to protect and defend us against all claims that is rising on your Website.</p>
+            </div>
+        </div>
+
+        <!-- ℹ️ ABOUT US -->
+        <div id="about" class="page-section">
+            <div class="content-card">
+                <h1>About Us</h1>
+                <p>Welcome to <b>Film News</b>. We are a dedicated digital news portal committed to delivering fast, accurate, and unbiased news and updates covering national and international events, entertainment (Nepali & Bollywood Movies), celebrity lifestyles, and historical facts.</p>
+                
+                <h2>Our Mission</h2>
+                <p>Our mission is to provide reliable, high-quality, and engaging information to our readers while maintaining the highest standards of digital journalism and transparency.</p>
+                
+                <h2>Our Team</h2>
+                <p>Our team consists of passionate media professionals, editors, and content writers who work tirelessly to bring timely updates straight to your screen.</p>
+            </div>
+        </div>
+
+        <!-- 📞 CONTACT US -->
+        <div id="contact" class="page-section">
+            <div class="content-card">
+                <h1>Contact Us</h1>
+                <p>If you have any questions, feedback, advertising proposals, or copyright concerns regarding our website, please feel free to contact us using the details below:</p>
+                <div class="contact-box">
+                    <p><b>📧 Email:</b> harishbist576@gmail.com</p>
+                    <p><b>📞 Phone:</b> +977-9767301333</p>
+                    <p><b>📍 Address:</b> Kathmandu, Nepal</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 📄 Footer Links -->
+    <footer>
+        <p>&copy; 2026 Film News. All rights reserved.</p>
+        <p style="margin-top: 10px;">
+            <a onclick="showSection('privacy')">Privacy Policy</a> | 
+            <a onclick="showSection('terms')">Terms & Conditions</a> | 
+            <a onclick="showSection('about')">About Us</a> | 
+            <a onclick="showSection('contact')">Contact Us</a>
+        </p>
+    </footer>
+
+    <!-- ⚡ JavaScript Logic to Switch Tabs -->
+    <script>
+        function showSection(sectionId, element) {
+            // सबै सेक्सन लुकाउने
+            document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active-page'));
+            // छनोट गरिएको सेक्सन देखाउने
+            document.getElementById(sectionId).classList.add('active-page');
+
+            // मेनुको बटनहरूको active class मिलाउने
+            if(element) {
+                document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+                element.classList.add('active');
+            }
+
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+</body>
+</html>

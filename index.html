@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Film News - Film News Portal</title>
+    <!-- Mukta फन्ट लोड गरिएको छ -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        body {
+            background-color: #f4f6f9;
+            color: #333;
+        }
+        /* Top Header & Logo */
+        header {
+            background-color: #001f3f;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid #f39c12;
+            flex-wrap: wrap;
+        }
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+        }
+        .logo-main {
+            font-size: 26px;
+            font-weight: 900;
+            color: #ffffff;
+            text-decoration: none;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+        .logo-sub {
+            font-size: 13px;
+            font-weight: bold;
+            color: #f39c12;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .nav-btn {
+            background-color: #f39c12;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+        }
+        .nav-btn:hover {
+            background-color: #d68910;
+        }
+
+        /* Category Menu */
+        nav {
+            background-color: #002b5c;
+            display: flex;
+            overflow-x: auto;
+            padding: 0 10px;
+            white-space: nowrap;
+        }
+        nav a {
+            color: white;
+            padding: 12px 18px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        nav a:hover, nav a.active {
+            background-color: #f39c12;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        /* Page Views (Sections) */
+        .page-section {
+            display: none;
+        }
+        .page-section.active-page {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 22px;
+            color: #001f3f;
+            border-bottom: 3px solid #001f3f;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        /* News Grid */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .news-card {
+            background: white;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .news-card:hover {
+            transform: translateY(-3px);
+        }
+        .news-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .news-content {
+            padding: 15px;
+        }
+        .news-cat {
+            font-size: 12px;
+            background: #eef2f7;
+            color: #001f3f;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        
+        /* 🌟 शीर्षक दायाँ छेउ सम्म फैलिन र राम्रो చూడिन मिलाइएको स्टाइल */
+        .news-title {
+            font-family: 'Mukta', Arial, sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            line-height: 1.4;
+            word-break: normal;
+            overflow-wrap: break-word;
+        }
+
+        .news-meta {
+            font-size: 13px;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+
+        /* Static Cards */
+        .content-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .content-card h2 {
+            color: #001f3f;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .content-card p, .content-card li {
+            margin-bottom: 12px;
+            font-size: 15px;
+            color: #444;
+            line-height: 1.6;
+        }
+        .contact-box {
+            background: #eef2f7;
+            padding: 15px;
+            border-left: 4px solid #001f3f;
+            border-radius: 4px;
+            margin-top: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #001f3f;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+        footer a {
+            color: #f39c12;
+            text-decoration: none;
+            margin: 0 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 🔝 Header & Logo -->
+    <header>
+        <div class="logo-container">
+            <a onclick="showPage('home')" class="logo-main">Film News</a>
+            <span class="logo-sub">🎬 Film News Portal</span>
+        </div>
+        <div>
+            <button class="nav-btn" onclick="window.location.href='cc.html'">⚙️ Settings</button>
+        </div>
+    </header>
+
+    <!-- 📂 Category Navigation Menu -->
+    <nav id="categoryNav">
+        <a class="active" onclick="filterCategory('All', this)">All News</a>
+        <a onclick="filterCategory('Nepali Movie', this)">Nepali Movie</a>
+        <a onclick="filterCategory('Bollywood Movie', this)">Bollywood Movie</a>
+        <a onclick="filterCategory('Hollywood Movie', this)">Hollywood Movie</a>
+        <a onclick="filterCategory('Celebrity Lifestyle', this)">Celebrity Lifestyle</a>
+        <a onclick="filterCategory('Political News', this)">Political News</a>
+        <a onclick="filterCategory('History', this)">History</a>
+    </nav>
+
+    <div class="container">
+
+        <!-- 🏠 HOME / NEWS PAGE -->
+        <div id="home" class="page-section active-page">
+            <h2 class="section-title" id="currentCatTitle">Latest Film & News Updates</h2>
+            <div class="news-grid" id="publicNewsGrid">
+                <!-- Firebase बाट समाचार यहाँ लोड हुनेछ -->
+                <p style="grid-column: 1/-1; text-align:center; color:#666;">Loading news from Firebase...</p>
+            </div>
+        </div>
+
+        <!-- ℹ️ ABOUT US PAGE -->
+        <div id="about" class="page-section">
+            <div class="content-card">
+                <h2 class="section-title" style="border:none; margin:0 0 15px 0;">About Us</h2>
+                <p>Welcome to <b>Film News</b>. We are a digital news portal committed to delivering fast, accurate, and unbiased news and updates.</p>
+            </div>
+        </div>
+
+        <!-- 📞 CONTACT US PAGE -->
+        <div id="contact" class="page-section">
+            <div class="content-card">
+                <h2 class="section-title" style="border:none; margin:0 0 15px 0;">Contact Us</h2>
+                <div class="contact-box">
+                    <p><b>📧 Email:</b> contact@filmnews.com</p>
+                    <p><b>📍 Address:</b> Kathmandu, Nepal</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🔒 PRIVACY POLICY PAGE -->
+        <div id="privacy" class="page-section">
+            <div class="content-card">
+                <h2 class="section-title" style="border:none; margin:0 0 15px 0;">Privacy Policy</h2>
+                <p>At Film News, the privacy of our visitors is of extreme importance to us.</p>
+            </div>
+        </div>
+
+        <!-- 📜 TERMS & CONDITIONS PAGE -->
+        <div id="terms" class="page-section">
+            <div class="content-card">
+                <h2 class="section-title" style="border:none; margin:0 0 15px 0;">Terms and Conditions</h2>
+                <p>By accessing Film News, you agree to be bound by these Terms and Conditions.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 📄 Footer Links -->
+    <footer>
+        <p>&copy; 2026 Film News. All rights reserved.</p>
+        <p style="margin-top: 10px;">
+            <a onclick="showPage('home')">Home</a> | 
+            <a onclick="showPage('about')">About Us</a> | 
+            <a onclick="showPage('contact')">Contact Us</a> | 
+            <a onclick="showPage('privacy')">Privacy Policy</a> | 
+            <a onclick="showPage('terms')">Terms & Conditions</a>
+        </p>
+    </footer>
+
+    <!-- ⚡ Firebase & JavaScript Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyDLn2oGT-rIZjcvKxbcCedfPBalpIDsaJw",
+          authDomain: "filmynews-3ba45.firebaseapp.com",
+          projectId: "filmynews-3ba45",
+          storageBucket: "filmynews-3ba45.firebasestorage.app",
+          messagingSenderId: "902647197974",
+          appId: "1:902647197974:web:3eec0940b8ec56bf22e037"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let allNews = [];
+
+        async function fetchNews() {
+            try {
+                const querySnapshot = await getDocs(collection(db, "news"));
+                allNews = [];
+                querySnapshot.forEach((doc) => {
+                    allNews.push({ id: doc.id, ...doc.data() });
+                });
+                displayNews(allNews);
+            } catch (error) {
+                console.error("Error fetching news: ", error);
+                document.getElementById('publicNewsGrid').innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:red;">Failed to load news from database.</p>';
+            }
+        }
+
+        function displayNews(newsArray) {
+            const grid = document.getElementById('publicNewsGrid');
+            grid.innerHTML = '';
+
+            if (newsArray.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#666;">No news available in this category.</p>';
+                return;
+            }
+
+            newsArray.forEach((news) => {
+                const card = document.createElement('div');
+                card.className = 'news-card';
+                card.onclick = () => {
+                    window.location.href = `read.html?id=${news.id}`;
+                };
+                card.innerHTML = `
+                    <img src="${news.image || 'https://picsum.photos/800/400'}" class="news-img" alt="News Image">
+                    <div class="news-content">
+                        <span class="news-cat">${news.category || 'General'}</span>
+                        <h3 class="news-title">${news.title}</h3>
+                        <div class="news-meta">
+                            <span>By ${news.author || 'Admin'}</span>
+                            <span>👁️ ${news.views || 0}</span>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        window.showPage = function(pageId) {
+            document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active-page'));
+            document.getElementById(pageId).classList.add('active-page');
+            document.getElementById('categoryNav').style.display = (pageId === 'home') ? 'flex' : 'none';
+            window.scrollTo(0, 0);
+        }
+
+        window.filterCategory = function(category, element) {
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            if(element) element.classList.add('active');
+
+            document.getElementById('currentCatTitle').innerText = category === 'All' ? 'Latest Film & News Updates' : category + ' News';
+
+            if (category === 'All') {
+                displayNews(allNews);
+            } else {
+                const filtered = allNews.filter(n => n.category === category);
+                displayNews(filtered);
+            }
+        }
+
+        fetchNews();
+    </script>
+
+</body>
+</html>
