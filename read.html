@@ -341,21 +341,21 @@
                 console.error("Error updating share count:", error);
             }
 
-            const pageUrl = encodeURIComponent(window.location.href);
+            const pageUrl = window.location.href;
             const newsTitle = currentNewsData ? currentNewsData.title : document.title;
             const mainPoint = currentNewsData && currentNewsData.content ? currentNewsData.content.substring(0, 90) + '...' : '';
             
-            const shareTextFormatted = encodeURIComponent(`📢 *${newsTitle}*\\n\\n🔥 Summary: ${mainPoint}\\n\\nRead full details: `);
+            const shareTextFormatted = `📢 *${newsTitle}*\\n\\n🔥 Summary: ${mainPoint}\\n\\nRead full details: `;
 
             if (platform === 'fb') {
-                window.open(`https://facebook.com/sharer/sharer.php?u=${pageUrl}`, '_blank');
+                window.open(`https://facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`, '_blank');
             } else if (platform === 'tg') {
-                window.open(`https://t.me/share/url?url=${pageUrl}&text=${shareTextFormatted}`, '_blank');
+                window.open(`https://t.me/share/url?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(shareTextFormatted)}`, '_blank');
             } else if (platform === 'wa') {
-                window.open(`https://api.whatsapp.com/send?text=${shareTextFormatted}%20${pageUrl}`, '_blank');
+                window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareTextFormatted)}%20${encodeURIComponent(pageUrl)}`, '_blank');
             } else if (platform === 'more') {
                 document.getElementById('customPopup').classList.add('active');
-                navigator.clipboard.writeText(window.location.href);
+                navigator.clipboard.writeText(pageUrl);
             }
         }
 
@@ -363,7 +363,7 @@
             document.getElementById('customPopup').classList.remove('active');
         }
 
-        // Generate content with ads (Without "मुख्य समाचार" text)
+        // Generate content with ads
         function generateContentWithAds(text, wordLimit = 50) {
             const words = text.split(/\s+/);
             if (words.length <= wordLimit) {
@@ -463,7 +463,7 @@
 
                         ${formattedContent}
 
-                        <!-- Stats & Share Bar with Eye Icon for Views -->
+                        <!-- Stats & Share Bar -->
                         <div class="stats-share-container">
                             <div class="stats-area">
                                 <div class="stat-item">
