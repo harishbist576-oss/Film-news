@@ -4,15 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Dynamic Open Graph Meta Tags (शेयर गर्दा थम्बनेल र शीर्षक देखाउनको लागि) -->
-    <meta property="og:title" id="metaTitle" content="Mero Jindagi News">
-    <meta property="og:description" id="metaDesc" content="Mero Jindagi - तपाईंको भरपर्दो समाचार पोर्टल">
+    <!-- Dynamic Open Graph Meta Tags -->
+    <meta property="og:title" id="metaTitle" content="Film News">
+    <meta property="og:description" id="metaDesc" content="Film News - Your Trusted News Portal">
     <meta property="og:image" id="metaImage" content="https://picsum.photos/800/400">
     <meta property="og:url" id="metaUrl" content="">
 
-    <title id="pageTitle">समाचार विवरण - Mero Jindagi</title>
+    <!-- Twitter / X Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" id="twitterTitle" content="Film News">
+    <meta name="twitter:description" id="twitterDesc" content="Film News - Your Trusted News Portal">
+    <meta name="twitter:image" id="twitterImage" content="https://picsum.photos/800/400">
+
+    <title id="pageTitle">News Detail - Film News</title>
     
-    <!-- Mukta फन्ट लोड गरिएको छ -->
+    <!-- Mukta Font -->
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Mukta', Arial, sans-serif; }
@@ -65,6 +71,29 @@
             font-size: 15px; 
             color: #8b949e; 
             font-weight: 800;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        /* Language Selector Style */
+        .language-select-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .language-select {
+            background-color: #21262d;
+            color: #f0f6fc;
+            border: 1px solid #30363d;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .language-select:focus {
+            outline: none;
+            border-color: #f39c12;
         }
 
         .detail-img { 
@@ -76,7 +105,7 @@
             border: 1px solid #30363d;
         }
 
-        /* सेतो ब्याकग्राउन्ड कार्ड कन्टेन्ट */
+        /* Content Card */
         .content-card {
             background-color: #ffffff;
             border: 1px solid #d0d7de;
@@ -102,7 +131,7 @@
             margin-bottom: 0;
         }
 
-        /* प्रत्येक ५० शब्द पछि आउने स्वचालित ब्यानर विज्ञापन बक्स */
+        /* Ad Box */
         .ad-box {
             border: 2px dashed #484f58;
             background-color: #161b22;
@@ -115,8 +144,8 @@
             border-radius: 10px;
         }
 
-        /* 🌟 Realtime Share Section */
-        .share-container-box {
+        /* Share & Views Stats Box */
+        .stats-share-container {
             background-color: #161b22;
             border: 1px solid #30363d;
             border-radius: 10px;
@@ -129,24 +158,30 @@
             gap: 15px;
         }
 
-        .share-counter-area {
+        .stats-area {
+            display: flex;
+            gap: 25px;
+        }
+
+        .stat-item {
             display: flex;
             flex-direction: column;
             color: #ffffff;
         }
 
-        .share-count-number {
-            font-size: 28px;
+        .stat-number {
+            font-size: 24px;
             font-weight: 800;
             color: #f39c12;
             line-height: 1;
         }
 
-        .share-count-text {
-            font-size: 14px;
+        .stat-text {
+            font-size: 13px;
             font-weight: 800;
             color: #8b949e;
             text-transform: uppercase;
+            margin-top: 4px;
         }
 
         .share-buttons-grid {
@@ -174,12 +209,11 @@
         .s-btn:hover { opacity: 0.85; }
 
         .sb-fb { background-color: #3b5998; }
-        .sb-x { background-color: #000000; border-left: 1px solid #333; border-right: 1px solid #333; }
-        .sb-msg { background-color: #0084ff; }
+        .sb-tg { background-color: #0088cc; border-left: 1px solid #222; border-right: 1px solid #222; }
         .sb-wa { background-color: #25d366; }
         .sb-more { background-color: #88cc44; }
 
-        /* All News List Section (सबै समाचारहरूको थम्बनेलसहितको सूची) */
+        /* Related News Section */
         .related-section {
             margin-top: 40px;
             padding-top: 20px;
@@ -258,27 +292,40 @@
 <body>
 
     <header>
-        <a href="index.html" id="headerCategoryOnly" class="header-category-only">MERO JINDAGI</a>
+        <a href="index.html" id="headerCategoryOnly" class="header-category-only">FILM NEWS</a>
     </header>
 
     <div class="container">
-        <a href="index.html" class="back-btn">← मुख्य पृष्ठमा फर्कनुहोस्</a>
+        <a href="index.html" class="back-btn">&larr; Back to Home</a>
         
         <div id="newsDetailContainer">
-            <p style="text-align:center; color:#8b949e; font-size: 18px; padding: 40px; font-weight: 800;">समाचार लोड हुँदैछ...</p>
+            <p style="text-align:center; color:#8b949e; font-size: 18px; padding: 40px; font-weight: 800;">Loading news...</p>
         </div>
     </div>
 
     <div id="customPopup" class="custom-popup-overlay">
         <div class="custom-popup-box">
-            <div style="font-size: 18px; font-weight: 800; margin-bottom: 10px;">लिंक सफलतापूर्वक कपी भयो!</div>
-            <button class="custom-popup-btn" onclick="closeCustomPopup()">ठीक छ</button>
+            <div style="font-size: 18px; font-weight: 800; margin-bottom: 10px;">Link copied successfully!</div>
+            <button class="custom-popup-btn" onclick="closeCustomPopup()">OK</button>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 Mero Jindagi. All rights reserved.</p>
+        <p>&copy; 2026 Film News. All rights reserved.</p>
     </footer>
+
+    <!-- Google Translate Script (Hidden Element for Translation Engine) -->
+    <div id="google_translate_element" style="display:none;"></div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'ne,en,hi,es,fr,zh-CN,ar,bn,ja,de',
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -297,8 +344,34 @@
         const db = getFirestore(app);
 
         let currentNewsId = null;
+        let currentNewsData = null;
 
-        // शेयर काउन्ट रियलटाइम बढाउने फंक्सन
+        // Increment Views Realtime
+        async function incrementViews(newsId) {
+            try {
+                const newsRef = doc(db, "news", newsId);
+                await updateDoc(newsRef, {
+                    views: increment(1)
+                });
+            } catch (err) {
+                console.error("Error updating views: ", err);
+            }
+        }
+
+        // Handle Language Change via Google Translate Cookie
+        window.changeLanguage = function(selectObj) {
+            const langCode = selectObj.value;
+            const cookName = 'googtrans';
+            
+            // Set Google Translate cookie format
+            document.cookie = cookName + '=;/auto/' + langCode + ';path=/';
+            document.cookie = cookName + '=/en/' + langCode + ';path=/';
+            
+            // Reload page to trigger translation
+            location.reload();
+        }
+
+        // Handle Share Function
         window.handleShare = async function(platform) {
             if (!currentNewsId) return;
 
@@ -318,16 +391,17 @@
             }
 
             const pageUrl = encodeURIComponent(window.location.href);
-            const shareText = encodeURIComponent(window.document.title);
+            const newsTitle = currentNewsData ? currentNewsData.title : document.title;
+            const mainPoint = currentNewsData && currentNewsData.content ? currentNewsData.content.substring(0, 90) + '...' : '';
+            
+            const shareTextFormatted = encodeURIComponent(`📢 *${newsTitle}*\\n\\n🔥 Summary: ${mainPoint}\\n\\nRead full details: `);
 
             if (platform === 'fb') {
                 window.open(`https://facebook.com/sharer/sharer.php?u=${pageUrl}`, '_blank');
-            } else if (platform === 'x') {
-                window.open(`https://twitter.com/intent/tweet?url=${pageUrl}&text=${shareText}`, '_blank');
-            } else if (platform === 'msg') {
-                window.open(`https://facebook.com/dialog/send?link=${pageUrl}&app_id=291494419107518&redirect_uri=${pageUrl}`, '_blank');
+            } else if (platform === 'tg') {
+                window.open(`https://t.me/share/url?url=${pageUrl}&text=${shareTextFormatted}`, '_blank');
             } else if (platform === 'wa') {
-                window.open(`https://api.whatsapp.com/send?text=${shareText}%20-%20${pageUrl}`, '_blank');
+                window.open(`https://api.whatsapp.com/send?text=${shareTextFormatted}%20${pageUrl}`, '_blank');
             } else if (platform === 'more') {
                 document.getElementById('customPopup').classList.add('active');
                 navigator.clipboard.writeText(window.location.href);
@@ -338,7 +412,7 @@
             document.getElementById('customPopup').classList.remove('active');
         }
 
-        // हरेक ५०-५० शब्दमा टुक्राउने र बीचमा विज्ञापन राख्ने फंक्सन
+        // Generate content with ads
         function generateContentWithAds(text, wordLimit = 50) {
             const words = text.split(/\s+/);
             if (words.length <= wordLimit) {
@@ -348,6 +422,7 @@
             let htmlOutput = '';
             for (let i = 0; i < words.length; i += wordLimit) {
                 let chunk = words.slice(i, i + wordLimit).join(' ');
+
                 htmlOutput += `
                     <div class="content-card">
                         <p>${chunk}</p>
@@ -372,37 +447,43 @@
             const headerCategoryOnly = document.getElementById('headerCategoryOnly');
 
             if (!newsId) {
-                headerCategoryOnly.textContent = "MERO JINDAGI";
-                container.innerHTML = `<h2 style="color:#ff7b72; text-align:center; font-weight:900;">समाचार फेला परेन!</h2>`;
+                headerCategoryOnly.textContent = "FILM NEWS";
+                container.innerHTML = `<h2 style="color:#ff7b72; text-align:center; font-weight:900;">News not found!</h2>`;
                 return;
             }
 
             try {
+                await incrementViews(newsId);
+
                 const docRef = doc(db, "news", newsId);
                 const docSnap = await getDoc(docRef);
 
                 if (docSnap.exists()) {
-                    const selectedNews = docSnap.data();
-                    headerCategoryOnly.textContent = selectedNews.category || "MERO JINDAGI";
+                    currentNewsData = docSnap.data();
+                    headerCategoryOnly.textContent = currentNewsData.category || "FILM NEWS";
 
-                    // Social Share का लागि Meta Tags अपडेट गर्ने
-                    document.getElementById('pageTitle').textContent = selectedNews.title + " - Mero Jindagi";
-                    document.getElementById('metaTitle').setAttribute('content', selectedNews.title);
-                    document.getElementById('metaDesc').setAttribute('content', selectedNews.content ? selectedNews.content.substring(0, 100) + '...' : '');
-                    document.getElementById('metaImage').setAttribute('content', selectedNews.image || 'https://picsum.photos/800/400');
+                    // Meta Tags
+                    document.getElementById('pageTitle').textContent = currentNewsData.title + " - Film News";
+                    document.getElementById('metaTitle').setAttribute('content', currentNewsData.title);
+                    document.getElementById('metaDesc').setAttribute('content', currentNewsData.content ? currentNewsData.content.substring(0, 100) + '...' : '');
+                    document.getElementById('metaImage').setAttribute('content', currentNewsData.image || 'https://picsum.photos/800/400');
                     document.getElementById('metaUrl').setAttribute('content', window.location.href);
 
-                    const totalShares = selectedNews.shareCount || 0;
+                    document.getElementById('twitterTitle').setAttribute('content', currentNewsData.title);
+                    document.getElementById('twitterDesc').setAttribute('content', currentNewsData.content ? currentNewsData.content.substring(0, 100) + '...' : '');
+                    document.getElementById('twitterImage').setAttribute('content', currentNewsData.image || 'https://picsum.photos/800/400');
 
-                    // 🌟 Firebase बाट सबै समाचारहरू (All News) तानेर तल सूची बनाउने
+                    const totalShares = currentNewsData.shareCount || 0;
+                    const totalViews = currentNewsData.views || 1;
+
+                    // Related news list
                     const querySnapshot = await getDocs(collection(db, "news"));
                     let allNewsHtml = `
                         <div class="related-section">
-                            <h3 class="related-heading">थप अन्य समाचारहरू</h3>
+                            <h3 class="related-heading">Related News</h3>
                     `;
                     
                     querySnapshot.forEach((d) => {
-                        // हाल पढेको समाचार बाहेक अरू सबै समाचारहरू देखाउने (यदि हालको मात्रै पनि देखाउने भए यो कन्डिसन हटाउन सकिन्छ)
                         const data = d.data();
                         allNewsHtml += `
                             <a href="read.html?id=${d.id}" class="related-card">
@@ -416,47 +497,65 @@
                     });
                     allNewsHtml += `</div>`;
 
-                    let contentText = selectedNews.content || '';
+                    let contentText = currentNewsData.content || '';
                     let formattedContent = generateContentWithAds(contentText, 50);
 
+                    // 10 languages option check
                     container.innerHTML = `
-                        <h1 class="detail-title">${selectedNews.title}</h1>
+                        <h1 class="detail-title">${currentNewsData.title}</h1>
                         
                         <div class="detail-meta-box">
-                            <span>लेखक: ${selectedNews.author || 'Admin'}</span>
-                            <span>Category: ${selectedNews.category || 'General'}</span>
+                            <span>Author: ${currentNewsData.author || 'Admin'} | Category: ${currentNewsData.category || 'General'}</span>
+                            <div class="language-select-wrapper">
+                                <span>🌐 Lang:</span>
+                                <select class="language-select" onchange="changeLanguage(this)">
+                                    <option value="en">English</option>
+                                    <option value="ne">नेपाली (Nepali)</option>
+                                    <option value="hi">हिन्दी (Hindi)</option>
+                                    <option value="es">Español</option>
+                                    <option value="fr">Français</option>
+                                    <option value="zh-CN">中文 (Chinese)</option>
+                                    <option value="ar">العربية (Arabic)</option>
+                                    <option value="bn">বাংলা (Bengali)</option>
+                                    <option value="ja">日本語 (Japanese)</option>
+                                    <option value="de">Deutsch</option>
+                                </select>
+                            </div>
                         </div>
 
-                        <img src="${selectedNews.image || 'https://picsum.photos/800/400'}" class="detail-img" alt="News Image">
+                        <img src="${currentNewsData.image || 'https://picsum.photos/800/400'}" class="detail-img" alt="News Image">
 
-                        <!-- ५०-५० शब्दको अन्तरालमा कार्ड र स्वचालित विज्ञापनहरू -->
                         ${formattedContent}
 
-                        <!-- Realtime Share Bar -->
-                        <div class="share-container-box">
-                            <div class="share-counter-area">
-                                <span class="share-count-number" id="shareCountNum">${totalShares}</span>
-                                <span class="share-count-text">Shares</span>
+                        <!-- Stats & Share Bar with Eye Icon for Views -->
+                        <div class="stats-share-container">
+                            <div class="stats-area">
+                                <div class="stat-item">
+                                    <span class="stat-number">${totalViews}</span>
+                                    <span class="stat-text">👁️ Views</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number" id="shareCountNum">${totalShares}</span>
+                                    <span class="stat-text">Shares</span>
+                                </div>
                             </div>
                             <div class="share-buttons-grid">
                                 <button onclick="handleShare('fb')" class="s-btn sb-fb" title="Facebook">f</button>
-                                <button onclick="handleShare('x')" class="s-btn sb-x" title="X (Twitter)">𝕏</button>
-                                <button onclick="handleShare('msg')" class="s-btn sb-msg" title="Messenger">💬</button>
+                                <button onclick="handleShare('tg')" class="s-btn sb-tg" title="Telegram">✈</button>
                                 <button onclick="handleShare('wa')" class="s-btn sb-wa" title="WhatsApp">📞</button>
                                 <button onclick="handleShare('more')" class="s-btn sb-more" title="Copy Link / More">🔗</button>
                             </div>
                         </div>
 
-                        <!-- 🌟 सबै समाचारहरूको थम्बनेलसहितको सूची -->
                         ${allNewsHtml}
                     `;
                 } else {
-                    headerCategoryOnly.textContent = "MERO JINDAGI";
-                    container.innerHTML = `<h2 style="color:#ff7b72; text-align:center; font-weight:900;">समाचार फेला परेन!</h2>`;
+                    headerCategoryOnly.textContent = "FILM NEWS";
+                    container.innerHTML = `<h2 style="color:#ff7b72; text-align:center; font-weight:900;">News not found!</h2>`;
                 }
             } catch (error) {
                 console.error("Error loading news detail:", error);
-                container.innerHTML = `<h2 style="color:#ff7b72; text-align:center; font-weight:900;">त्रुटि (Error)</h2>`;
+                container.innerHTML = `<h2 style="color:#ff7b72; text-align:center; font-weight:900;">Error loading page</h2>`;
             }
         }
 
