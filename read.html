@@ -71,29 +71,6 @@
             font-size: 15px; 
             color: #8b949e; 
             font-weight: 800;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        /* Language Selector Style */
-        .language-select-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .language-select {
-            background-color: #21262d;
-            color: #f0f6fc;
-            border: 1px solid #30363d;
-            padding: 5px 10px;
-            border-radius: 6px;
-            font-weight: 800;
-            cursor: pointer;
-            font-size: 14px;
-        }
-        .language-select:focus {
-            outline: none;
-            border-color: #f39c12;
         }
 
         .detail-img { 
@@ -314,19 +291,6 @@
         <p>&copy; 2026 Film News. All rights reserved.</p>
     </footer>
 
-    <!-- Google Translate Script (Hidden Element for Translation Engine) -->
-    <div id="google_translate_element" style="display:none;"></div>
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'ne,en,hi,es,fr,zh-CN,ar,bn,ja,de',
-                autoDisplay: false
-            }, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, doc, getDoc, updateDoc, increment, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -356,19 +320,6 @@
             } catch (err) {
                 console.error("Error updating views: ", err);
             }
-        }
-
-        // Handle Language Change via Google Translate Cookie
-        window.changeLanguage = function(selectObj) {
-            const langCode = selectObj.value;
-            const cookName = 'googtrans';
-            
-            // Set Google Translate cookie format
-            document.cookie = cookName + '=;/auto/' + langCode + ';path=/';
-            document.cookie = cookName + '=/en/' + langCode + ';path=/';
-            
-            // Reload page to trigger translation
-            location.reload();
         }
 
         // Handle Share Function
@@ -412,7 +363,7 @@
             document.getElementById('customPopup').classList.remove('active');
         }
 
-        // Generate content with ads
+        // Generate content with ads (Without "मुख्य समाचार" text)
         function generateContentWithAds(text, wordLimit = 50) {
             const words = text.split(/\s+/);
             if (words.length <= wordLimit) {
@@ -500,27 +451,12 @@
                     let contentText = currentNewsData.content || '';
                     let formattedContent = generateContentWithAds(contentText, 50);
 
-                    // 10 languages option check
                     container.innerHTML = `
                         <h1 class="detail-title">${currentNewsData.title}</h1>
                         
                         <div class="detail-meta-box">
-                            <span>Author: ${currentNewsData.author || 'Admin'} | Category: ${currentNewsData.category || 'General'}</span>
-                            <div class="language-select-wrapper">
-                                <span>🌐 Lang:</span>
-                                <select class="language-select" onchange="changeLanguage(this)">
-                                    <option value="en">English</option>
-                                    <option value="ne">नेपाली (Nepali)</option>
-                                    <option value="hi">हिन्दी (Hindi)</option>
-                                    <option value="es">Español</option>
-                                    <option value="fr">Français</option>
-                                    <option value="zh-CN">中文 (Chinese)</option>
-                                    <option value="ar">العربية (Arabic)</option>
-                                    <option value="bn">বাংলা (Bengali)</option>
-                                    <option value="ja">日本語 (Japanese)</option>
-                                    <option value="de">Deutsch</option>
-                                </select>
-                            </div>
+                            <span>Author: ${currentNewsData.author || 'Admin'}</span>
+                            <span>Category: ${currentNewsData.category || 'General'}</span>
                         </div>
 
                         <img src="${currentNewsData.image || 'https://picsum.photos/800/400'}" class="detail-img" alt="News Image">
