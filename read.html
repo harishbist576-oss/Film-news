@@ -322,7 +322,7 @@
             }
         }
 
-        // Handle Share Function
+        // Handle Share Function with rich text summary
         window.handleShare = async function(platform) {
             if (!currentNewsId) return;
 
@@ -343,16 +343,17 @@
 
             const pageUrl = window.location.href;
             const newsTitle = currentNewsData ? currentNewsData.title : document.title;
-            const mainPoint = currentNewsData && currentNewsData.content ? currentNewsData.content.substring(0, 90) + '...' : '';
+            const mainPoint = currentNewsData && currentNewsData.content ? currentNewsData.content.substring(0, 110) + '...' : '';
             
-            const shareTextFormatted = `📢 *${newsTitle}*\\n\\n🔥 Summary: ${mainPoint}\\n\\nRead full details: `;
+            // आकर्षक र प्रष्ट देखिने म्यासेज फर्म्याट
+            const shareTextFormatted = `📢 *${newsTitle}*\n\n🔥 मुख्य सारांश: ${mainPoint}\n\n👉 पुरा पढ्न यहाँ क्लिक गर्नुहोस्:`;
 
             if (platform === 'fb') {
                 window.open(`https://facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`, '_blank');
             } else if (platform === 'tg') {
-                window.open(`https://t.me/share/url?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(shareTextFormatted)}`, '_blank');
+                window.open(`https://t.me/share/url?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(shareTextFormatted + ' ' + pageUrl)}`, '_blank');
             } else if (platform === 'wa') {
-                window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareTextFormatted)}%20${encodeURIComponent(pageUrl)}`, '_blank');
+                window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareTextFormatted + ' ' + pageUrl)}`, '_blank');
             } else if (platform === 'more') {
                 document.getElementById('customPopup').classList.add('active');
                 navigator.clipboard.writeText(pageUrl);
