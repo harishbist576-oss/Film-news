@@ -3,302 +3,297 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Film News - Film News Portal</title>
-    <!-- Mukta फन्ट लोड गरिएको छ -->
-    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Dynamic Open Graph Meta Tags -->
+    <meta property="og:title" id="metaTitle" content="Film News">
+    <meta property="og:description" id="metaDesc" content="Film News - Your Trusted News Portal">
+    <meta property="og:image" id="metaImage" content="https://picsum.photos/800/400">
+    <meta property="og:url" id="metaUrl" content="">
+
+    <!-- Twitter / X Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" id="twitterTitle" content="Film News">
+    <meta name="twitter:description" id="twitterDesc" content="Film News - Your Trusted News Portal">
+    <meta name="twitter:image" id="twitterImage" content="https://picsum.photos/800/400">
+
+    <title id="pageTitle">News Detail - Film News</title>
+    
+    <!-- Mukta Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Roboto', Arial, sans-serif;
-        }
-        body {
-            background-color: #f4f6f9;
-            color: #333;
-        }
-        /* Top Header & Logo */
-        header {
-            background-color: #001f3f;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 4px solid #f39c12;
-            flex-wrap: wrap;
-        }
-        .logo-container {
-            display: flex;
-            flex-direction: column;
-        }
-        .logo-main {
-            font-size: 26px;
-            font-weight: 900;
-            color: #ffffff;
-            text-decoration: none;
-            letter-spacing: 1px;
-            cursor: pointer;
-        }
-        .logo-sub {
-            font-size: 13px;
-            font-weight: bold;
-            color: #f39c12;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        .nav-btn {
-            background-color: #f39c12;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-            cursor: pointer;
-            border: none;
-        }
-        .nav-btn:hover {
-            background-color: #d68910;
-        }
-
-        /* Category Menu */
-        nav {
-            background-color: #002b5c;
-            display: flex;
-            overflow-x: auto;
-            padding: 0 10px;
-            white-space: nowrap;
-        }
-        nav a {
-            color: white;
-            padding: 12px 18px;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: bold;
-            transition: 0.2s;
-            cursor: pointer;
-        }
-        nav a:hover, nav a.active {
-            background-color: #f39c12;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 20px auto;
-            padding: 0 15px;
-        }
-
-        /* Page Views (Sections) */
-        .page-section {
-            display: none;
-        }
-        .page-section.active-page {
-            display: block;
-        }
-
-        .section-title {
-            font-size: 22px;
-            color: #001f3f;
-            border-bottom: 3px solid #001f3f;
-            padding-bottom: 5px;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-
-        /* News Grid */
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-        .news-card {
-            background: white;
-            border-radius: 6px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        .news-card:hover {
-            transform: translateY(-3px);
-        }
-        .news-img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-        .news-content {
-            padding: 15px;
-        }
-        .news-cat {
-            font-size: 12px;
-            background: #eef2f7;
-            color: #001f3f;
-            padding: 3px 8px;
-            border-radius: 3px;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 8px;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Mukta', Arial, sans-serif; }
         
-        /* 🌟 शीर्षक दायाँ छेउ सम्म फैलिन र राम्रो చూడिन मिलाइएको स्टाइल */
-        .news-title {
-            font-family: 'Mukta', Arial, sans-serif;
-            font-size: 20px;
+        body { background-color: #0d1117; color: #f0f6fc; display: flex; flex-direction: column; min-height: 100vh; }
+        
+        header { background-color: #161b22; padding: 18px 30px; display: flex; justify-content: center; align-items: center; border-bottom: 4px solid #f39c12; width: 100%; }
+        .header-category-only { font-size: 24px; font-weight: 800; color: #ffffff; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .container { 
+            width: 100%; 
+            max-width: 850px; 
+            margin: 20px auto; 
+            padding: 0 8px; 
+            flex: 1;
+        }
+
+        .back-btn { 
+            background-color: #161b22; 
+            color: white; 
+            padding: 9px 18px; 
+            border-radius: 6px; 
+            border: 1px solid #30363d; 
+            cursor: pointer; 
+            font-weight: 800; 
+            margin-bottom: 20px; 
+            display: inline-block; 
+            text-decoration: none; 
+            font-size: 15px;
+        }
+        .back-btn:hover { background-color: #f39c12; border-color: #f39c12; }
+
+        .detail-title { 
+            font-size: 30px; 
+            color: #ffffff; 
+            margin-bottom: 15px; 
+            line-height: 1.4; 
             font-weight: 800;
-            color: #1a1a1a;
-            margin-bottom: 12px;
-            line-height: 1.4;
+            width: 100%;
+        }
+
+        .detail-meta-box { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid #30363d; 
+            border-top: 2px solid #30363d;
+            padding: 12px 0; 
+            margin-bottom: 25px; 
+            font-size: 15px; 
+            color: #8b949e; 
+            font-weight: 800;
+        }
+
+        .detail-img { 
+            width: 100%; 
+            max-height: 480px; 
+            object-fit: cover; 
+            border-radius: 10px; 
+            margin-bottom: 25px; 
+            border: 1px solid #30363d;
+        }
+
+        /* Content Card */
+        .content-card {
+            background-color: #ffffff;
+            border: 1px solid #d0d7de;
+            border-radius: 12px;
+            padding: 24px 20px;
+            margin-bottom: 20px;
+            font-size: 22px;
+            color: #24292f;
+            line-height: 1.9;
+            font-weight: 700;
+            width: 100%;
+            text-align: justify;
             word-break: normal;
             overflow-wrap: break-word;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .news-meta {
-            font-size: 13px;
-            color: #666;
-            display: flex;
-            justify-content: space-between;
-            border-top: 1px solid #eee;
-            padding-top: 10px;
+        .content-card p {
+            margin-bottom: 18px;
+            width: 100%;
+        }
+        .content-card p:last-child {
+            margin-bottom: 0;
         }
 
-        /* Static Cards */
-        .content-card {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-        .content-card h2 {
-            color: #001f3f;
-            margin-top: 20px;
-            margin-bottom: 10px;
-            font-size: 18px;
-        }
-        .content-card p, .content-card li {
-            margin-bottom: 12px;
-            font-size: 15px;
-            color: #444;
-            line-height: 1.6;
-        }
-        .contact-box {
-            background: #eef2f7;
-            padding: 15px;
-            border-left: 4px solid #001f3f;
-            border-radius: 4px;
-            margin-top: 15px;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #001f3f;
-            color: white;
+        /* Ad Box */
+        .ad-box {
+            border: 2px dashed #484f58;
+            background-color: #161b22;
             text-align: center;
-            padding: 25px;
-            margin-top: 40px;
-            font-size: 14px;
+            padding: 20px;
+            color: #8b949e;
+            font-size: 16px;
+            font-weight: 800;
+            margin: 20px 0;
+            border-radius: 10px;
         }
-        footer a {
+
+        /* Share & Views Stats Box */
+        .stats-share-container {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin: 25px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .stats-area {
+            display: flex;
+            gap: 25px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            color: #ffffff;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 800;
             color: #f39c12;
+            line-height: 1;
+        }
+
+        .stat-text {
+            font-size: 13px;
+            font-weight: 800;
+            color: #8b949e;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        .share-buttons-grid {
+            display: flex;
+            gap: 4px;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .s-btn {
+            width: 52px;
+            height: 48px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
             text-decoration: none;
-            margin: 0 10px;
-            cursor: pointer;
+            font-size: 20px;
             font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
         }
-        footer a:hover {
-            text-decoration: underline;
+
+        .s-btn:hover { opacity: 0.85; }
+
+        .sb-fb { background-color: #3b5998; }
+        .sb-tg { background-color: #0088cc; border-left: 1px solid #222; border-right: 1px solid #222; }
+        .sb-wa { background-color: #25d366; }
+        .sb-more { background-color: #88cc44; }
+
+        /* Related News Section */
+        .related-section {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 3px solid #30363d;
         }
+        .related-heading {
+            font-size: 22px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 18px;
+            border-left: 5px solid #f39c12;
+            padding-left: 10px;
+        }
+        .related-card {
+            display: flex;
+            gap: 15px;
+            background: #161b22;
+            padding: 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid #30363d;
+            margin-bottom: 12px;
+            align-items: center;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        .related-card:hover {
+            border-color: #f39c12;
+            transform: translateX(3px);
+        }
+        .related-thumb {
+            width: 120px;
+            height: 85px;
+            object-fit: cover;
+            border-radius: 6px;
+            flex-shrink: 0;
+            border: 1px solid #30363d;
+        }
+        .related-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .related-cat {
+            font-size: 12px;
+            color: #f39c12;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .related-title {
+            font-size: 17px;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.4;
+        }
+
+        /* Custom Popup */
+        .custom-popup-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.75); display: flex; justify-content: center; align-items: center;
+            z-index: 9999; opacity: 0; visibility: hidden; transition: 0.3s;
+        }
+        .custom-popup-overlay.active { opacity: 1; visibility: visible; }
+        .custom-popup-box {
+            background: #161b22; padding: 25px; border-radius: 12px; text-align: center; max-width: 320px; width: 90%;
+            border-top: 4px solid #f39c12; color: #fff; border: 1px solid #30363d;
+        }
+        .custom-popup-btn {
+            background-color: #f39c12; color: white; border: none; padding: 9px 22px; font-weight: 800; border-radius: 6px; cursor: pointer; margin-top: 15px;
+        }
+
+        footer { background-color: #161b22; color: #8b949e; text-align: center; padding: 25px; margin-top: 40px; font-size: 14px; border-top: 1px solid #30363d; }
     </style>
 </head>
 <body>
 
-    <!-- 🔝 Header & Logo -->
     <header>
-        <div class="logo-container">
-            <a onclick="showPage('home')" class="logo-main">Film News</a>
-            <span class="logo-sub">🎬 Film News Portal</span>
-        </div>
-        <div>
-            <button class="nav-btn" onclick="window.location.href='cc.html'">⚙️ Settings</button>
-        </div>
+        <a href="index.html" id="headerCategoryOnly" class="header-category-only">FILM NEWS</a>
     </header>
 
-    <!-- 📂 Category Navigation Menu -->
-    <nav id="categoryNav">
-        <a class="active" onclick="filterCategory('All', this)">All News</a>
-        <a onclick="filterCategory('Nepali Movie', this)">Nepali Movie</a>
-        <a onclick="filterCategory('Bollywood Movie', this)">Bollywood Movie</a>
-        <a onclick="filterCategory('Hollywood Movie', this)">Hollywood Movie</a>
-        <a onclick="filterCategory('Celebrity Lifestyle', this)">Celebrity Lifestyle</a>
-        <a onclick="filterCategory('Political News', this)">Political News</a>
-        <a onclick="filterCategory('History', this)">History</a>
-    </nav>
-
     <div class="container">
-
-        <!-- 🏠 HOME / NEWS PAGE -->
-        <div id="home" class="page-section active-page">
-            <h2 class="section-title" id="currentCatTitle">Latest Film & News Updates</h2>
-            <div class="news-grid" id="publicNewsGrid">
-                <!-- Firebase बाट समाचार यहाँ लोड हुनेछ -->
-                <p style="grid-column: 1/-1; text-align:center; color:#666;">Loading news from Firebase...</p>
-            </div>
+        <a href="index.html" class="back-btn">&larr; Back to Home</a>
+        
+        <div id="newsDetailContainer">
+            <p style="text-align:center; color:#8b949e; font-size: 18px; padding: 40px; font-weight: 800;">Loading news...</p>
         </div>
-
-        <!-- ℹ️ ABOUT US PAGE -->
-        <div id="about" class="page-section">
-            <div class="content-card">
-                <h2 class="section-title" style="border:none; margin:0 0 15px 0;">About Us</h2>
-                <p>Welcome to <b>Film News</b>. We are a digital news portal committed to delivering fast, accurate, and unbiased news and updates.</p>
-            </div>
-        </div>
-
-        <!-- 📞 CONTACT US PAGE -->
-        <div id="contact" class="page-section">
-            <div class="content-card">
-                <h2 class="section-title" style="border:none; margin:0 0 15px 0;">Contact Us</h2>
-                <div class="contact-box">
-                    <p><b>📧 Email:</b> contact@filmnews.com</p>
-                    <p><b>📍 Address:</b> Kathmandu, Nepal</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 🔒 PRIVACY POLICY PAGE -->
-        <div id="privacy" class="page-section">
-            <div class="content-card">
-                <h2 class="section-title" style="border:none; margin:0 0 15px 0;">Privacy Policy</h2>
-                <p>At Film News, the privacy of our visitors is of extreme importance to us.</p>
-            </div>
-        </div>
-
-        <!-- 📜 TERMS & CONDITIONS PAGE -->
-        <div id="terms" class="page-section">
-            <div class="content-card">
-                <h2 class="section-title" style="border:none; margin:0 0 15px 0;">Terms and Conditions</h2>
-                <p>By accessing Film News, you agree to be bound by these Terms and Conditions.</p>
-            </div>
-        </div>
-
     </div>
 
-    <!-- 📄 Footer Links -->
+    <div id="customPopup" class="custom-popup-overlay">
+        <div class="custom-popup-box">
+            <div style="font-size: 18px; font-weight: 800; margin-bottom: 10px;">Link copied successfully!</div>
+            <button class="custom-popup-btn" onclick="closeCustomPopup()">OK</button>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2026 Film News. All rights reserved.</p>
-        <p style="margin-top: 10px;">
-            <a onclick="showPage('home')">Home</a> | 
-            <a onclick="showPage('about')">About Us</a> | 
-            <a onclick="showPage('contact')">Contact Us</a> | 
-            <a onclick="showPage('privacy')">Privacy Policy</a> | 
-            <a onclick="showPage('terms')">Terms & Conditions</a>
-        </p>
     </footer>
 
-    <!-- ⚡ Firebase & JavaScript Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, doc, getDoc, updateDoc, increment, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
           apiKey: "AIzaSyDLn2oGT-rIZjcvKxbcCedfPBalpIDsaJw",
@@ -312,75 +307,195 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        let allNews = [];
+        let currentNewsId = null;
+        let currentNewsData = null;
 
-        async function fetchNews() {
+        // Increment Views Realtime
+        async function incrementViews(newsId) {
             try {
-                const querySnapshot = await getDocs(collection(db, "news"));
-                allNews = [];
-                querySnapshot.forEach((doc) => {
-                    allNews.push({ id: doc.id, ...doc.data() });
+                const newsRef = doc(db, "news", newsId);
+                await updateDoc(newsRef, {
+                    views: increment(1)
                 });
-                displayNews(allNews);
-            } catch (error) {
-                console.error("Error fetching news: ", error);
-                document.getElementById('publicNewsGrid').innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:red;">Failed to load news from database.</p>';
+            } catch (err) {
+                console.error("Error updating views: ", err);
             }
         }
 
-        function displayNews(newsArray) {
-            const grid = document.getElementById('publicNewsGrid');
-            grid.innerHTML = '';
+        // Handle Share Function
+        window.handleShare = async function(platform) {
+            if (!currentNewsId) return;
 
-            if (newsArray.length === 0) {
-                grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#666;">No news available in this category.</p>';
+            try {
+                const docRef = doc(db, "news", currentNewsId);
+                await updateDoc(docRef, {
+                    shareCount: increment(1)
+                });
+
+                const countElem = document.getElementById('shareCountNum');
+                if(countElem) {
+                    let currentCount = parseInt(countElem.textContent) || 0;
+                    countElem.textContent = currentCount + 1;
+                }
+            } catch (error) {
+                console.error("Error updating share count:", error);
+            }
+
+            const pageUrl = encodeURIComponent(window.location.href);
+            const newsTitle = currentNewsData ? currentNewsData.title : document.title;
+            const mainPoint = currentNewsData && currentNewsData.content ? currentNewsData.content.substring(0, 90) + '...' : '';
+            
+            const shareTextFormatted = encodeURIComponent(`📢 *${newsTitle}*\\n\\n🔥 Summary: ${mainPoint}\\n\\nRead full details: `);
+
+            if (platform === 'fb') {
+                window.open(`https://facebook.com/sharer/sharer.php?u=${pageUrl}`, '_blank');
+            } else if (platform === 'tg') {
+                window.open(`https://t.me/share/url?url=${pageUrl}&text=${shareTextFormatted}`, '_blank');
+            } else if (platform === 'wa') {
+                window.open(`https://api.whatsapp.com/send?text=${shareTextFormatted}%20${pageUrl}`, '_blank');
+            } else if (platform === 'more') {
+                document.getElementById('customPopup').classList.add('active');
+                navigator.clipboard.writeText(window.location.href);
+            }
+        }
+
+        window.closeCustomPopup = function() {
+            document.getElementById('customPopup').classList.remove('active');
+        }
+
+        // Generate content with ads (Without "मुख्य समाचार" text)
+        function generateContentWithAds(text, wordLimit = 50) {
+            const words = text.split(/\s+/);
+            if (words.length <= wordLimit) {
+                return `<div class="content-card"><p>${text}</p></div>`;
+            }
+
+            let htmlOutput = '';
+            for (let i = 0; i < words.length; i += wordLimit) {
+                let chunk = words.slice(i, i + wordLimit).join(' ');
+
+                htmlOutput += `
+                    <div class="content-card">
+                        <p>${chunk}</p>
+                    </div>
+                `;
+                
+                if (i + wordLimit < words.length) {
+                    htmlOutput += `
+                        <div class="ad-box">
+                        </div>
+                    `;
+                }
+            }
+            return htmlOutput;
+        }
+
+        async function loadNewsDetail() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const newsId = urlParams.get('id');
+            currentNewsId = newsId;
+            const container = document.getElementById('newsDetailContainer');
+            const headerCategoryOnly = document.getElementById('headerCategoryOnly');
+
+            if (!newsId) {
+                headerCategoryOnly.textContent = "FILM NEWS";
+                container.innerHTML = `<h2 style="color:#ff7b72; text-align:center; font-weight:900;">News not found!</h2>`;
                 return;
             }
 
-            newsArray.forEach((news) => {
-                const card = document.createElement('div');
-                card.className = 'news-card';
-                card.onclick = () => {
-                    window.location.href = `read.html?id=${news.id}`;
-                };
-                card.innerHTML = `
-                    <img src="${news.image || 'https://picsum.photos/800/400'}" class="news-img" alt="News Image">
-                    <div class="news-content">
-                        <span class="news-cat">${news.category || 'General'}</span>
-                        <h3 class="news-title">${news.title}</h3>
-                        <div class="news-meta">
-                            <span>By ${news.author || 'Admin'}</span>
-                            <span>👁️ ${news.views || 0}</span>
+            try {
+                await incrementViews(newsId);
+
+                const docRef = doc(db, "news", newsId);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    currentNewsData = docSnap.data();
+                    headerCategoryOnly.textContent = currentNewsData.category || "FILM NEWS";
+
+                    // Meta Tags
+                    document.getElementById('pageTitle').textContent = currentNewsData.title + " - Film News";
+                    document.getElementById('metaTitle').setAttribute('content', currentNewsData.title);
+                    document.getElementById('metaDesc').setAttribute('content', currentNewsData.content ? currentNewsData.content.substring(0, 100) + '...' : '');
+                    document.getElementById('metaImage').setAttribute('content', currentNewsData.image || 'https://picsum.photos/800/400');
+                    document.getElementById('metaUrl').setAttribute('content', window.location.href);
+
+                    document.getElementById('twitterTitle').setAttribute('content', currentNewsData.title);
+                    document.getElementById('twitterDesc').setAttribute('content', currentNewsData.content ? currentNewsData.content.substring(0, 100) + '...' : '');
+                    document.getElementById('twitterImage').setAttribute('content', currentNewsData.image || 'https://picsum.photos/800/400');
+
+                    const totalShares = currentNewsData.shareCount || 0;
+                    const totalViews = currentNewsData.views || 1;
+
+                    // Related news list
+                    const querySnapshot = await getDocs(collection(db, "news"));
+                    let allNewsHtml = `
+                        <div class="related-section">
+                            <h3 class="related-heading">Related News</h3>
+                    `;
+                    
+                    querySnapshot.forEach((d) => {
+                        const data = d.data();
+                        allNewsHtml += `
+                            <a href="read.html?id=${d.id}" class="related-card">
+                                <img src="${data.image || 'https://picsum.photos/800/400'}" class="related-thumb" alt="Thumbnail">
+                                <div class="related-info">
+                                    <span class="related-cat">${data.category || 'News'}</span>
+                                    <h4 class="related-title">${data.title}</h4>
+                                </div>
+                            </a>
+                        `;
+                    });
+                    allNewsHtml += `</div>`;
+
+                    let contentText = currentNewsData.content || '';
+                    let formattedContent = generateContentWithAds(contentText, 50);
+
+                    container.innerHTML = `
+                        <h1 class="detail-title">${currentNewsData.title}</h1>
+                        
+                        <div class="detail-meta-box">
+                            <span>Author: ${currentNewsData.author || 'Admin'}</span>
+                            <span>Category: ${currentNewsData.category || 'General'}</span>
                         </div>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
 
-        window.showPage = function(pageId) {
-            document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active-page'));
-            document.getElementById(pageId).classList.add('active-page');
-            document.getElementById('categoryNav').style.display = (pageId === 'home') ? 'flex' : 'none';
-            window.scrollTo(0, 0);
-        }
+                        <img src="${currentNewsData.image || 'https://picsum.photos/800/400'}" class="detail-img" alt="News Image">
 
-        window.filterCategory = function(category, element) {
-            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-            if(element) element.classList.add('active');
+                        ${formattedContent}
 
-            document.getElementById('currentCatTitle').innerText = category === 'All' ? 'Latest Film & News Updates' : category + ' News';
+                        <!-- Stats & Share Bar with Eye Icon for Views -->
+                        <div class="stats-share-container">
+                            <div class="stats-area">
+                                <div class="stat-item">
+                                    <span class="stat-number">${totalViews}</span>
+                                    <span class="stat-text">👁️ Views</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number" id="shareCountNum">${totalShares}</span>
+                                    <span class="stat-text">Shares</span>
+                                </div>
+                            </div>
+                            <div class="share-buttons-grid">
+                                <button onclick="handleShare('fb')" class="s-btn sb-fb" title="Facebook">f</button>
+                                <button onclick="handleShare('tg')" class="s-btn sb-tg" title="Telegram">✈</button>
+                                <button onclick="handleShare('wa')" class="s-btn sb-wa" title="WhatsApp">📞</button>
+                                <button onclick="handleShare('more')" class="s-btn sb-more" title="Copy Link / More">🔗</button>
+                            </div>
+                        </div>
 
-            if (category === 'All') {
-                displayNews(allNews);
-            } else {
-                const filtered = allNews.filter(n => n.category === category);
-                displayNews(filtered);
+                        ${allNewsHtml}
+                    `;
+                } else {
+                    headerCategoryOnly.textContent = "FILM NEWS";
+                    container.innerHTML = `<h2 style="color:#ff7b72; text-align:center; font-weight:900;">News not found!</h2>`;
+                }
+            } catch (error) {
+                console.error("Error loading news detail:", error);
+                container.innerHTML = `<h2 style="color:#ff7b72; text-align:center; font-weight:900;">Error loading page</h2>`;
             }
         }
 
-        fetchNews();
+        loadNewsDetail();
     </script>
-
 </body>
 </html>
